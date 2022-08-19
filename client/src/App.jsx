@@ -4,7 +4,7 @@ import {BrowserRouter, Route,Routes} from "react-router-dom";
 import { Home } from './pages/Home';
 import { Starter } from './pages/Starter';
 import {FilterSidebar} from './modules/FilterSidebar';
-
+import {InsertDish} from './pages/InsertDish';
 
 function App() {
 
@@ -20,6 +20,9 @@ function App() {
           </Route>
           <Route path="/main"
             element={<FilterSidebar/>}>
+          </Route>
+          <Route path="/insert"
+            element={<InsertDish/>}>
           </Route>
         </Routes>
       </BrowserRouter>
