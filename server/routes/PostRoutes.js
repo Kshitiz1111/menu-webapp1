@@ -8,11 +8,16 @@ router
   .route("/ab")
   .get(postControllers.getAllUsers)
   .post(postControllers.createNewUser);
+router.route("/a/:id")
+  .get(postControllers.getUserById);
 
 router
   .route("/insertdish")
+  .get(dishControllers.getDishes)
   .post(dishControllers.addNewDish);
+// router
+//   .route("/uploadimage")
+//   .post(dishControllers.uploadImage);
 
-router.route("/a/:id").get(postControllers.getUserById);
 
 module.exports = router;

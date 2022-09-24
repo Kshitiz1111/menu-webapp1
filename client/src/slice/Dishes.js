@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState ={
     dishes : [
@@ -294,8 +295,17 @@ export const initDishes = createSlice({
     name: "DishesDB",
     initialState,
     reducers: {
-        
+    //    async loadDishes(state, action){
+    //        try {
+    //         const response = await axios.get("http://localhost:3001/post/insertdish")
+    //         console.log(response);
+    //        } catch (error) {
+    //         console.log(error);
+    //        }
+            
+    //     },
     },
 })
 
+// export const {loadDishes} = initDishes.actions;
 export default initDishes.reducer;

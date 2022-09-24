@@ -8,8 +8,9 @@ import { AddToOrder } from '../modules/DishDetail/AddToOrder';
 import { OrderList } from '../modules/OrderList';
 import React from 'react';
 import { useSelector } from 'react-redux';
-
-
+import { useDispatch } from 'react-redux';
+// import {loadDishes} from '../slice/Dishes'
+import axios from 'axios';
 
  
 
@@ -27,6 +28,22 @@ const Home = ()=>{
     const orders = useSelector((state)=>state.HandleOrder.orders);
 
     const selectedItem = useSelector((state)=>state.DishCard.selectedItem);
+    
+    /////
+    // const dispatch = useDispatch()
+    React.useEffect(()=>{
+      try {
+        axios.get("http://localhost:3001/post/insertdish")
+        .then((res)=>{
+          console.log(res);
+        }).then((data)=>{
+          console.log(data);
+        })
+        
+      } catch (error) {
+        console.log(error);
+      }
+    },[])
       return (
         <>
           {
