@@ -6,7 +6,7 @@ import { Starter } from './pages/Starter';
 import {FilterSidebar} from './modules/FilterSidebar';
 import {InsertDish} from './pages/InsertDish';
 
-import {Image} from './pages/Image';
+// import {Image} from './pages/Image';
 function App() {
 
   return(
@@ -25,9 +25,9 @@ function App() {
           <Route path="/insert"
             element={<InsertDish/>}>
           </Route>
-          <Route path="/upload"
+          {/* <Route path="/upload"
             element={<Image/>}>
-          </Route>
+          </Route> */}
         </Routes>
       </BrowserRouter>
   

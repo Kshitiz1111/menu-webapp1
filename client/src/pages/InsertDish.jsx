@@ -45,7 +45,7 @@ function addCustomIngInput(e){
 // }    
 let imgpath = null;
 function addDishToList(){
-    const img = document.getElementById('d_img');
+    // const img = document.getElementById('d_img');
     const name = document.getElementById('d_name');
     const price = document.getElementById('d_price');
     const d_point = document.getElementById('d_point');
@@ -139,8 +139,7 @@ const InsertDish = ()=>{
         setDishList(DishObj);
     }
     function editDish(id){
-        // 
-        const img = document.getElementById('d_img');
+        // const img = document.getElementById('d_img');
         const name = document.getElementById('d_name');
         const price = document.getElementById('d_price');
         const d_point = document.getElementById('d_point');
@@ -155,7 +154,7 @@ const InsertDish = ()=>{
         const metadata = document.getElementById("metadata");
         // 
         console.log();
-
+// eslint-disable-next-line
         DishObj.map((dish)=>{
             if(dish.id === id){
                 name.value = dish.name;
@@ -179,6 +178,8 @@ const InsertDish = ()=>{
                 
                 //
                 delDish(id);
+
+            
             }
         }) 
     }

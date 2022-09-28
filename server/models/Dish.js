@@ -130,9 +130,16 @@ class Dish{
 
    }
 
-  static getAllDish(){
+   static getAllDish(){
       let sql = 'SELECT * FROM dish';
-
+      return db.query(sql);
+   }
+   static getAllCusIngredient(){
+      let sql = 'SELECT * FROM custom_ingredient';
+      return db.query(sql);
+   }
+   static getAllDishFilter(){
+      let sql = 'SELECT * FROM filter';
       return db.query(sql);
    }
 }

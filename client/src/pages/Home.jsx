@@ -9,7 +9,7 @@ import { OrderList } from '../modules/OrderList';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-// import {loadDishes} from '../slice/Dishes'
+import {setDishes} from '../slice/Dishes'
 import axios from 'axios';
 
  
@@ -30,20 +30,20 @@ const Home = ()=>{
     const selectedItem = useSelector((state)=>state.DishCard.selectedItem);
     
     /////
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch();
+
     React.useEffect(()=>{
       try {
         axios.get("http://localhost:3001/post/insertdish")
-        .then((res)=>{
-          console.log(res);
-        }).then((data)=>{
-          console.log(data);
+        .then((res)=>{  
+            dispatch(setDishes(res.data));
         })
         
       } catch (error) {
         console.log(error);
       }
     },[])
+
       return (
         <>
           {
