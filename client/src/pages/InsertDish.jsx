@@ -57,6 +57,7 @@ function addDishToList(){
     const signature = document.getElementById("signature");
     const countries = document.querySelectorAll("[name='country']");
     const methods = document.querySelectorAll("[name='method']");
+    const cook_time = document.getElementById("cook_time");
     const metadata = document.getElementById("metadata");
 
     let selectedContries = [];
@@ -72,7 +73,7 @@ function addDishToList(){
             selectedCookingMethods = [...selectedCookingMethods, methods[index].value];
         };
     };
-let metadataArray = [
+    let metadataArray = [
         name.value, 
         d_category.value,
         ...d_bi.value.split(','), 
@@ -110,6 +111,7 @@ let metadataArray = [
                signature: (signature.checked)? 1:0,
                country: selectedContries.toString(),
                method: selectedCookingMethods.toString(),
+               cook_time: parseInt(cook_time.value),
                metadata: metadataArray.toString(),
                 //only for edit purpose
                 typedMetadata: metadata.value.split(',').toString(),
@@ -119,10 +121,10 @@ let metadataArray = [
     ];
    
 
-    // let jsonType = JSON.stringify(DishObj);
+    let jsonType = JSON.stringify(DishObj);
 
 
-// console.log(jsonType);
+console.log(jsonType);
 }
 
 const InsertDish = ()=>{
@@ -151,10 +153,11 @@ const InsertDish = ()=>{
         const signature = document.getElementById("signature");
         const countries = document.querySelectorAll("[name='country']");
         const methods = document.querySelectorAll("[name='method']");
+        const cook_time = document.querySelectorAll("[name='cook_time']");
         const metadata = document.getElementById("metadata");
         // 
         console.log();
-// eslint-disable-next-line
+        // eslint-disable-next-line
         DishObj.map((dish)=>{
             if(dish.id === id){
                 name.value = dish.name;
@@ -174,6 +177,7 @@ const InsertDish = ()=>{
                 signature.checked = (dish.filter.signature === 1)? true:false;
                 countries.value = dish.filter.country;
                 methods.value = dish.filter.method;
+                cook_time.value = dish.filter.cook_time;
                 metadata.value = dish.filter.typedMetadata;
                 
                 //
@@ -272,6 +276,9 @@ console.log(dishList);
                 <input className="p-2 rounded-full m-2" type="checkbox" name="method" value="bake"/>bake
                 <input className="p-2 rounded-full m-2" type="checkbox" name="method" value="bbq"/>bbq                    
                 
+                <br/><br/><label for="cookTime">Enter Estimated Cooking Time in minute</label><br/>
+                <span><input id="cook_time" className="p-2 rounded-full  m-2" type="number" name='cook_time' placeholder='eg: 60' min={1}/> min</span>
+
                 <br /><br /><label htmlFor="">Enter Metadata </label><br/>
                 <textarea id="metadata" className="p-2 m-2 rounded-md" type="textarea" name="metadata" rows="4" cols="30" placeholder="seperate by comma (,)"/><br />
                 
@@ -312,7 +319,7 @@ console.log(dishList);
                 }
                 
             </div>
-            {(DishObj)? <div onClick={()=>addDish(DishObj)}>send</div>:""}
+            {(DishObj)? <div className='bg-red-500 p-2 text-center text-white text-xl tracking-widest' onClick={()=>addDish(DishObj)}>send</div>:""}
         </div>
         </>
         

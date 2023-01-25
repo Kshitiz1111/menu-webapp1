@@ -4,6 +4,7 @@ import { useSelector,useDispatch } from "react-redux";
 import { openIng,closeAllDishCard } from "../../slice/OpenSingleDish";
 import { reset } from "../../slice/CustomizeIng";
 import { addToOrderList } from "../../slice/OrderList";
+import {getUDID} from '../slice/UniqueDeviceId';
 
 const AddToOrder = ({selectedDish} )=>{
     ////
@@ -14,6 +15,9 @@ const AddToOrder = ({selectedDish} )=>{
     const [value, setValue] = React.useState(1);
     const [extraItemPrice, setExtraItemPrice] = React.useState();
     const [finalPrice, setFinalPrice] = React.useState(selectedDish.price);
+    ////
+    const UDID = useSelector((state)=>state.UDID.id);
+    console.log(UDID);
 
     let sumExtra = 0;
 

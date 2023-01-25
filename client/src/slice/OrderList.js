@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { v4 as uuid } from 'uuid';
 
 const initialState = {
     orders: [],
@@ -7,12 +8,14 @@ const initialState = {
         status: "edit",
     },
     finalOrderList: {
+        tableNumber:null,
+        clientId:'',
+        orderId: '',
         totalItems: 0,
-        Items: [{
-            name: null,
-            customIngredient: null,
-        }],
+        Items: [],
         FinalPrice: 0,
+        timestamp:'',
+
     }
 }
 
@@ -43,12 +46,14 @@ export const  OrderList= createSlice({
                     price: totalPrice,
                     removeIngs: removeIngs,
                     extraIngs: extraIngs,
-                    customIngredient: dish.customIngredient,
+                    customIngredient: dish.cusIngredient,
+                    cook_time: dish.filters.cook_time,
+                    category: dish.filters.category,
                     }
                 ]
             }
            
-
+            console.log("hey")
             console.log(state.orders);
             //recalculate final price
             state.finalOrderList.FinalPrice = 0;
@@ -167,11 +172,11 @@ export const  OrderList= createSlice({
         finalizedOrder(state){
             state.finalOrderList.totalItems = 0;
             // eslint-disable-next-line
-            state.finalOrderList.Items.map((item)=>{
-                item.name = null;
-                item.customIngredient = null;
-            });
+            state.finalOrderList.Items = [];
             state.finalOrderList.FinalPrice = 0;
+            state.finalOrderList.tableNumber = null;
+            state.finalOrderList.clientId = null;
+            state.finalOrderList.orderId = null;
 
             if(state.orders.length > 0){
                 for (let index = 0; index < state.orders.length; index++) {
@@ -186,14 +191,31 @@ export const  OrderList= createSlice({
                         [...arr2,` Remove: ${item}`]
                     ))
                     const Arr = arr1.concat(arr2);
-                    state.finalOrderList.Items = [...state.finalOrderList.Items,{name: state.orders[index].name, customIngredient: Arr}];
+                    state.finalOrderList.Items = [
+                        ...state.finalOrderList.Items,
+                        {
+                            itemId: state.orders[index].id.slice(0,8),
+                            name: state.orders[index].name, 
+                            quantity: state.orders[index].quantity,
+                            customIngredient: Arr,
+                            removeIngs: state.orders[index].removeIngs,
+                            extraIngs: state.orders[index].extraIngs,
+                            type: state.orders[index].category,
+                            cooktime: state.orders[index].cook_time,
+                            itemPrice: state.orders[index].price,
+
+                        }
+                    ];
                     
                     state.finalOrderList.FinalPrice += state.orders[index].price;
+                    state.finalOrderList.tableNumber = null;
+                    state.finalOrderList.clientId = null;
+                    state.finalOrderList.orderId = uuid().slice(0,8);
                 }
             }
             
             console.log("this is final order");
-            console.log(state.finalOrderList);
+            console.log(JSON.stringify(state.finalOrderList));
         },
 
         

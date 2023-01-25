@@ -16,7 +16,8 @@ export const OpenSingleDish  = createSlice({
             state.openIngsCard = false;
             state.openOrderCard = false;
             state.selectedItem = action.payload;
-            
+            console.log("this is selected Item")
+            console.log(state.selectedItem.cusIngredient[1])
         },
         openIng: (state,action)=>{
             state.openDishCard = true;

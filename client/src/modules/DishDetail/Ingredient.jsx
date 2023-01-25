@@ -23,9 +23,9 @@ const Ingredient = ({selectedDish})=>{
                 <p><strong>Base Ingredient</strong></p>
                 <div className="flex flex-wrap">
                     {
-                        selectedDish.baseIngredient.map((ingredient,index)=>(
-                            <span className="px-2 py-1 m-1 rounded-full bg-gray-400" key={index}>{ingredient}</span>
-                        ))
+                        
+                        <span className="px-2 py-1 text-gray-500" >{selectedDish.baseIngredient}</span>
+                        
                     }
                 </div>
 
@@ -37,7 +37,7 @@ const Ingredient = ({selectedDish})=>{
                 <div className="p-2">
                    <ul>
                         {
-                            selectedDish.customIngredient.map((ingredient,index)=>(
+                            selectedDish.cusIngredient.map((ingredient,index)=>(
                                 <li className="flex my-2" key={index}>
                                     <p className="font-semibold">{ingredient.name}</p>
                                     <div className="px-2">

@@ -46,6 +46,7 @@ class Dish{
             signature: obj[x].filter.signature,
             country: obj[x].filter.country,
             method: obj[x].filter.method,
+            cook_time: obj[x].filter.cook_time,
             metadata: obj[x].filter.metadata
          }
 
@@ -64,7 +65,7 @@ class Dish{
                name, 
                price, 
                img, 
-               base_ingredient
+               baseIngredient
             ) 
             VALUES( 
                '${this.objArr[x].id}',
@@ -75,7 +76,7 @@ class Dish{
             )
          `;
 
-      db.execute(dish_sql);
+         db.execute(dish_sql);
 
          for (let index = 0; index < this.objArr[x].cus_ings.length; index++) {
                
@@ -110,6 +111,7 @@ class Dish{
                signature,
                country,
                method,
+               cook_time,
                metadata
             )
             VALUES(
@@ -121,6 +123,7 @@ class Dish{
                '${this.objArr[x].signature}',
                '${this.objArr[x].country}',
                '${this.objArr[x].method}',
+               '${this.objArr[x].cook_time}',
                '${this.objArr[x].metadata}'
             )
 
