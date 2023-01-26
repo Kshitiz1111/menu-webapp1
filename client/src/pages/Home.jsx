@@ -9,8 +9,11 @@ import { OrderList } from '../modules/OrderList';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import {setDishes} from '../slice/Dishes'
+import {setDishes} from '../slice/Dishes';
+import {getUDID} from '../slice/UniqueDeviceId';
+
 import axios from 'axios';
+import { useEffect } from 'react';
 
  
 
@@ -31,6 +34,11 @@ const Home = ()=>{
     
     /////
     const dispatch = useDispatch();
+    
+    function getUniqueDeviceId(){
+      dispatch(getUDID());
+    }
+    useEffect(()=>{getUniqueDeviceId();},[])
 
     React.useEffect(()=>{
       try {

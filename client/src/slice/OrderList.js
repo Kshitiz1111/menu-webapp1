@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuid } from 'uuid';
 
 const initialState = {
+    availableTables:[1,2,3,4,5,6,7,8,9,10],
     orders: [],
     orderActiveToEdit: {
         id: null,
@@ -169,12 +170,11 @@ export const  OrderList= createSlice({
             }
         },
 
-        finalizedOrder(state){
+        finalizedOrder(state,action){
             state.finalOrderList.totalItems = 0;
             // eslint-disable-next-line
             state.finalOrderList.Items = [];
             state.finalOrderList.FinalPrice = 0;
-            state.finalOrderList.tableNumber = null;
             state.finalOrderList.clientId = null;
             state.finalOrderList.orderId = null;
 
@@ -208,8 +208,7 @@ export const  OrderList= createSlice({
                     ];
                     
                     state.finalOrderList.FinalPrice += state.orders[index].price;
-                    state.finalOrderList.tableNumber = null;
-                    state.finalOrderList.clientId = null;
+                    state.finalOrderList.clientId = action.payload;
                     state.finalOrderList.orderId = uuid().slice(0,8);
                 }
             }
@@ -217,10 +216,15 @@ export const  OrderList= createSlice({
             console.log("this is final order");
             console.log(JSON.stringify(state.finalOrderList));
         },
+        addTableNumber:(state,action)=>{
+            state.finalOrderList.tableNumber = null;
+            state.finalOrderList.tableNumber = action.payload;
+            console.log(state.finalOrderList.tableNumber);
+        },
 
         
     }
 })
 
-export const {addToOrderList, deleteOrder, editOrder,replaceIngs,finalizedOrder} = OrderList.actions;
+export const {addToOrderList, deleteOrder, editOrder,replaceIngs,finalizedOrder,addTableNumber} = OrderList.actions;
 export default OrderList.reducer;

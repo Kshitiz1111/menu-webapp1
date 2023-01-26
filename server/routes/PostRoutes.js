@@ -1,6 +1,7 @@
 const express = require('express');
 const postControllers = require('../controllers/PostControllers');
 const dishControllers = require('../controllers/DishControllers');
+const orderControllers = require('../controllers/OrderControllers');
 const router = express.Router();
 
 // @route Get and Post - /posts/
@@ -19,5 +20,7 @@ router
 //   .route("/uploadimage")
 //   .post(dishControllers.uploadImage);
 
-
+router
+  .route("/order")
+  // .post(orderControllers.addNewOrder);
 module.exports = router;

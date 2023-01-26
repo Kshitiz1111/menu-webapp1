@@ -17,7 +17,7 @@ export const UniqueDeviceId = createSlice({
          uid += screen_info.width || '';
          uid += screen_info.pixelDepth || '';
          
-         state.UDID = uid;
+         state.id = uid;
       }
    }
 })

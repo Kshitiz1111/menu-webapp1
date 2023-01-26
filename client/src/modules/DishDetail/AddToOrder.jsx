@@ -4,20 +4,20 @@ import { useSelector,useDispatch } from "react-redux";
 import { openIng,closeAllDishCard } from "../../slice/OpenSingleDish";
 import { reset } from "../../slice/CustomizeIng";
 import { addToOrderList } from "../../slice/OrderList";
-import {getUDID} from '../slice/UniqueDeviceId';
+
 
 const AddToOrder = ({selectedDish} )=>{
     ////
     const dispatch = useDispatch();
     const removeIngs = useSelector((state)=>state.CustomizedIngredients.removeIngs);
     const extraIngs = useSelector((state)=>state.CustomizedIngredients.extraIngs);
+    const UDID = useSelector((state)=>state.UDID.id);
     ////
     const [value, setValue] = React.useState(1);
     const [extraItemPrice, setExtraItemPrice] = React.useState();
     const [finalPrice, setFinalPrice] = React.useState(selectedDish.price);
     ////
-    const UDID = useSelector((state)=>state.UDID.id);
-    console.log(UDID);
+    
 
     let sumExtra = 0;
 
@@ -42,7 +42,8 @@ const AddToOrder = ({selectedDish} )=>{
             totalPrice: finalPrice,
             quantity: value,
             removeIngs: removeIngs,
-            extraIngs: extraIngs
+            extraIngs: extraIngs,
+           
         };
         dispatch(addToOrderList(item));
         dispatch(closeAllDishCard());

@@ -1,18 +1,43 @@
 import React from "react";
 import { Orders } from "./Orders";
 import { useSelector, useDispatch } from "react-redux";
-import { finalizedOrder } from "../slice/OrderList";
+import { finalizedOrder,addTableNumber } from "../slice/OrderList";
+import { useEffect } from "react";
+
 
 const OrderList = ({ orders })=>{
     const dispatch = useDispatch();
     const finalO = useSelector((state)=>state.HandleOrder.finalOrderList);
+    const UDID = useSelector((state)=>state.UDID.id);
+    const availableTables = useSelector((state)=>state.HandleOrder.availableTables);
+    console.log(typeof(toString(availableTables.length)),availableTables.length);
     const[cardDisplay, setCardDisplay] = React.useState(false);
+    const[tableNumber, SetTableNumber] = React.useState();
     function Close(){
         setCardDisplay(false);
     }
+
+    function assignEditTableNumber(){
+        dispatch(addTableNumber(tableNumber));
+    }
+    useEffect(assignEditTableNumber,[tableNumber])
+
     function Open(){
         setCardDisplay(true);
-        dispatch(finalizedOrder());
+        dispatch(finalizedOrder(UDID));
+    }
+
+    const [tableErr, setTableErr] = React.useState('');
+    function postOrderToDatabase(target){
+        if(!finalO.tableNumber){
+            target.style.cursor = "not-allowed";
+            setTableErr('enter table number');
+        }else{
+            target.style.cursor = "pointer";
+            setTableErr('');
+            console.log(JSON.stringify(finalO));
+        }
+        
     }
 
     return(
@@ -22,11 +47,23 @@ const OrderList = ({ orders })=>{
         <div>
         <div className="absolute inset-0  bg-gray-400 blur-3xl z-50"></div>
         <div className="absolute inset-x-11 bg-gray-200 p-4 z-50">
-        <div onClick={Close} className="float-right bg-gray-400 px-3 text-base rounded-xl shadow-md">close</div>
+        <div className="flex justify-between items-center">
+            <span className="bg-grey-200 text-black px-3 py-1 text-base rounded-xl shadow-inner">OID-{finalO.orderId}</span>
+            <span onClick={Close} className="bg-gray-400 px-3 text-base rounded-xl shadow-md">close</span>
+        </div>
             {
                 (finalO.totalItems !== 0)? 
                 <>
-                    
+                    <div className="mt-5 mb-2 relative">
+                    {  
+                        <span>
+                            <label htmlFor="tableNumber">TableNumber: </label>
+                            <input id="tableNumber" type="number" className="rounded-xl w-10" onInput={(e)=>SetTableNumber(e.target.value)} max={toString(availableTables.length)} min='1' value={finalO?.tableNumber} />
+                            <span id="tableErr" className="text-base text-red-500 px-1">{tableErr}</span>
+                        </span> 
+                    }
+                    </div>
+                
                     <span><strong>Total Dish: </strong>{finalO.totalItems}</span>
                     {   
                         
@@ -40,7 +77,7 @@ const OrderList = ({ orders })=>{
                         ))
                     }
                     <span className="text-xl"><strong>Total Price: </strong>{finalO.FinalPrice}rs</span>
-                    <div className="float-right text-xl font-bold bg-gray-400 px-4 py-3 rounded-xl shadow-md">Place Order</div>
+                    <button onClick={(e)=>postOrderToDatabase(e.target)} id="placeOrder" className="float-right text-xl font-bold bg-gray-400 px-4 py-3 rounded-xl shadow-md">Place Order</button>
                 </> : <p className="text-gray-400">OrderList is empty please order your dish first.</p>
                 
             }
