@@ -3,6 +3,7 @@ import { Orders } from "./Orders";
 import { useSelector, useDispatch } from "react-redux";
 import { finalizedOrder,addTableNumber } from "../slice/OrderList";
 import { useEffect } from "react";
+import axios from "axios";
 
 
 const OrderList = ({ orders })=>{
@@ -35,7 +36,15 @@ const OrderList = ({ orders })=>{
         }else{
             target.style.cursor = "pointer";
             setTableErr('');
-            console.log(JSON.stringify(finalO));
+            //
+            axios.post("http://localhost:3001/post/order",finalO)
+            .then((res)=>{
+            console.log(res);
+            })
+            .catch((err)=>{
+            console.log(err);
+            });  
+            // console.log(JSON.stringify(finalO));
         }
         
     }

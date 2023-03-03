@@ -22,5 +22,5 @@ router
 
 router
   .route("/order")
-  // .post(orderControllers.addNewOrder);
+  .post(orderControllers.addNewOrder);
 module.exports = router;

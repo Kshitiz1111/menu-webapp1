@@ -177,6 +177,7 @@ export const  OrderList= createSlice({
             state.finalOrderList.FinalPrice = 0;
             state.finalOrderList.clientId = null;
             state.finalOrderList.orderId = null;
+            state.finalOrderList.timestamp = null;
 
             if(state.orders.length > 0){
                 for (let index = 0; index < state.orders.length; index++) {
@@ -206,7 +207,8 @@ export const  OrderList= createSlice({
 
                         }
                     ];
-                    
+                    let date = `${new Date().getFullYear()}, ${new Date().getDate()}, ${new Date().getDay()}, ${new Date().getHours().toString()}, ${new Date().getMinutes()}, ${new Date().getSeconds()}, ${new Date().getMilliseconds()}`;
+                    state.finalOrderList.timestamp = date;
                     state.finalOrderList.FinalPrice += state.orders[index].price;
                     state.finalOrderList.clientId = action.payload;
                     state.finalOrderList.orderId = uuid().slice(0,8);

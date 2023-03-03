@@ -101,7 +101,7 @@ class Dish{
       // }
       for (let x = 0; x < this.objArr.length; x++) {
          
-      let filter_sql = `
+         let filter_sql = `
             INSERT INTO filter(
                id,
                star,
@@ -128,7 +128,7 @@ class Dish{
             )
 
          `
-      db.execute(filter_sql);
+         db.execute(filter_sql);
       }
 
    }
