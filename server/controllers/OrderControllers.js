@@ -6,9 +6,7 @@ exports.addNewOrder = async (req, res, next)=>{
       const orderObj = req.body;
       const order = new Order(orderObj);
       let result = await order.save();
-      if(!result){
-         console.log("*******");
-      }
+      console.log(result);
       res.status(201).json({message: 'successfully posted order info'})
      
    } catch (error) {

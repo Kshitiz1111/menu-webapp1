@@ -207,7 +207,7 @@ export const  OrderList= createSlice({
 
                         }
                     ];
-                    let date = `${new Date().getFullYear()}, ${new Date().getDate()}, ${new Date().getDay()}, ${new Date().getHours().toString()}, ${new Date().getMinutes()}, ${new Date().getSeconds()}, ${new Date().getMilliseconds()}`;
+                    let date = `${new Date().getFullYear()}, ${new Date().getMonth()+1}, ${new Date().getDate()}, ${new Date().getHours().toString()}, ${new Date().getMinutes()}, ${new Date().getSeconds()}, ${new Date().getMilliseconds()}`;
                     state.finalOrderList.timestamp = date;
                     state.finalOrderList.FinalPrice += state.orders[index].price;
                     state.finalOrderList.clientId = action.payload;
@@ -215,13 +215,12 @@ export const  OrderList= createSlice({
                 }
             }
             
-            console.log("this is final order");
-            console.log(JSON.stringify(state.finalOrderList));
+            // console.log("this is final order");
+            // console.log(JSON.stringify(state.finalOrderList));
         },
         addTableNumber:(state,action)=>{
             state.finalOrderList.tableNumber = null;
             state.finalOrderList.tableNumber = action.payload;
-            console.log(state.finalOrderList.tableNumber);
         },
 
         

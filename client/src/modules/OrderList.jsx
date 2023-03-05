@@ -34,6 +34,7 @@ const OrderList = ({ orders })=>{
             target.style.cursor = "not-allowed";
             setTableErr('enter table number');
         }else{
+            console.log(JSON.stringify(finalO));
             target.style.cursor = "pointer";
             setTableErr('');
             //
