@@ -1,3 +1,4 @@
+const { execute } = require('../config/DB');
 const db = require('../config/DB');
 
 class Order{
@@ -88,6 +89,19 @@ class Order{
          `;
          db.execute(itemInfo_sql);
       }
+   }
+
+   static getAllOrders(){
+      let orders_sql = `
+         SELECT * FROM orders
+      `;
+      return db.query(orders_sql);
+   }
+   static getAllOrderedItems(){
+      let ordered_items_sql = `
+         SELECT * FROM ordered_items
+      `;
+      return db.query(ordered_items_sql);
    }
 }
 

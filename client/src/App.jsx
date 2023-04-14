@@ -5,6 +5,7 @@ import { Home } from './pages/Home';
 import { Starter } from './pages/Starter';
 import {FilterSidebar} from './modules/FilterSidebar';
 import {InsertDish} from './pages/InsertDish';
+import { ViewOrders } from './pages/cook/ViewOrders';
 
 // import {Image} from './pages/Image';
 function App() {
@@ -24,6 +25,9 @@ function App() {
           </Route>
           <Route path="/insert"
             element={<InsertDish/>}>
+          </Route>
+          <Route path="/allOrders"
+            element={<ViewOrders/>}>
           </Route>
           {/* <Route path="/upload"
             element={<Image/>}>

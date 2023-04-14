@@ -16,39 +16,39 @@ exports.addNewDish = async (req, res, next) =>{
 exports.getDishes = async(req, res, next) =>{
    try {
       
-   let [dishes, a] = await Dish.getAllDish();
-   // console.log(dishes);
+      let [dishes, a] = await Dish.getAllDish();
+      // console.log(dishes);
 
-   let [cusIngredientsDetached, b] = await Dish.getAllCusIngredient();
-   // console.log(cusIngredientsDetached);
+      let [cusIngredientsDetached, b] = await Dish.getAllCusIngredient();
+      // console.log(cusIngredientsDetached);
 
-   let [filtersDetached, c] = await Dish.getAllDishFilter();
-   // console.log(filtersDetached);
-   
-   let customIngredients=[];
-   //combine and rearrange dishes according to their cusIngredients and filters
-   dishes.forEach(dish => {
-      cusIngredientsDetached.forEach((ing, index)=> {
-         //pack/group all the ingredients which matches ing.id with dish.id
-         if(dish.id === ing.id){
-            customIngredients.push(ing);
-         }
-         //assign new property cusIngredient to with customIngredients  
-        dish.cusIngredient = [...customIngredients];
+      let [filtersDetached, c] = await Dish.getAllDishFilter();
+      // console.log(filtersDetached);
+      
+      let customIngredients=[];
+      //combine and rearrange dishes according to their cusIngredients and filters
+      dishes.forEach(dish => {
+         cusIngredientsDetached.forEach((ing, index)=> {
+            //pack/group all the ingredients which matches ing.id with dish.id
+            if(dish.id === ing.id){
+               customIngredients.push(ing);
+            }
+            //assign new property cusIngredient to with customIngredients  
+         dish.cusIngredient = [...customIngredients];
+         });
+         //empth customIngredients array to reassign another dish ingredients
+         customIngredients=[];
+
+         filtersDetached.forEach(filter => {
+            if(dish.id === filter.id){
+               dish.filters = filter;
+            }
+         });
       });
-      //empth customIngredients array to reassign another dish ingredients
-      customIngredients=[];
-
-      filtersDetached.forEach(filter => {
-         if(dish.id === filter.id){
-            dish.filters = filter;
-         }
-      });
-   });
-   console.log("final dish");
-   console.log(dishes);
-   
-   res.status(200).json(dishes);
+      console.log("final dish");
+      console.log(dishes);
+      
+      res.status(200).json(dishes);
    } catch (error) {
       console.log(error)
    }

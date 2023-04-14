@@ -22,5 +22,6 @@ router
 
 router
   .route("/order")
-  .post(orderControllers.addNewOrder);
+  .post(orderControllers.addNewOrder)
+  .get(orderControllers.getOrders);
 module.exports = router;
