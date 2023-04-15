@@ -1,5 +1,5 @@
 
-export const Card = ()=>{
+const Card = ()=>{
    return(
       <div className="w-64 bg-gray-300 p-2  border-2 border-dashed border-white">
          <div className="flex justify-between items-baseline">
@@ -71,3 +71,4 @@ export const Card = ()=>{
    )
 };
 
+export{Card}

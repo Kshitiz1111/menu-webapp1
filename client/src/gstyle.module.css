@@ -1,6 +1,9 @@
 /* .navtitle{
    
 } */
-.fgrow2{
+.flexgrow2{
    flex-grow: 2;
+}
+.flexgrow3{
+   flex-grow: 3;
 }
