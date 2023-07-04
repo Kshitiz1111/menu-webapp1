@@ -7,3 +7,15 @@
 .flexgrow3{
    flex-grow: 3;
 }
+.w400px{
+   width: 400px;
+}
+.w30percent{
+   width: 30%;
+}
+.w60percent{
+   width: 60%;
+}
+.minw20percent{
+   min-width: 20%;
+}

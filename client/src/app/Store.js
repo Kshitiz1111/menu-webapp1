@@ -5,6 +5,8 @@ import CustomizeIng from '../slice/CustomizeIng';
 import OrderList from '../slice/OrderList';
 import Filter from '../slice/Filter';
 import UniqueDeviceId from '../slice/UniqueDeviceId';
+//cook
+import AllOrders from '../slice/cook/AllOrders';
 
 export const store = configureStore({
     reducer: {
@@ -14,5 +16,7 @@ export const store = configureStore({
         HandleOrder: OrderList, 
         Filter: Filter,
         UDID: UniqueDeviceId,
+        //cook
+        AllOrders: AllOrders
     },
 })

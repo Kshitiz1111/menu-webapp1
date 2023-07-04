@@ -1,6 +1,8 @@
 import gstyle  from '../../gstyle.module.css'
 import plus from '../../assets/plus.ico'
 import chefphoto from '../../assets/chef.png'
+import { PrepareItem } from "../../modules/OrderManagement/PrepairItem.jsx";
+
 
 let chefs = [
    {id:332,name:"chef1",level:"junior",assignedDish:[{id:null,name:null},{id:2,name:null}],shift:"M",available:1},
@@ -12,7 +14,7 @@ let chefs = [
 
 const AssignOrder = ()=>{
    return(
-      <div className="flex w-full">
+      <div className="flex flex-wrap w-full">
          <div className="flex flex-col flex-wrap flex-grow max-w-xl">
             <div className='flex mb-2 flex-wrap justify-evenly max-h-40 overflow-y-scroll'>
                <div className="border p-1 mb-1 w-64 rounded-xl shadow-md">
@@ -273,7 +275,9 @@ const AssignOrder = ()=>{
             </div>
 
          </div>
-         <div className={`${gstyle.flexgrow3}`}>prepare items</div>
+         <div className={`${gstyle.w60percent} ${gstyle.minw20percent}`}>
+            <PrepareItem></PrepareItem>
+         </div>
       </div>
    )
 }
